@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Monster Slayer</title>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <div id="app">
+      <section class="row">
+        <div class="small-6 columns">
+          <h1 class="text-center">YOU</h1>
+          <div class="healthbar">
+            <div
+              class="healthbar text-center"
+              style="background-color: green; margin: 0; color: white;"
+              :style="{width: yourHP + '%'}"
+              v-html="yourHP"
+            >
+              {{ yourHP }}
+            </div>
+          </div>
+        </div>
+        <div class="small-6 columns">
+          <h1 class="text-center">MONSTER</h1>
+          <div class="healthbar">
+            <div
+              class="healthbar text-center"
+              style="background-color: green; margin: 0; color: white;"
+              :style="{width: monsterHP + '%'}"
+              v-html="monsterHP"
+            >
+              {{ monsterHP }}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="row controls" v-if="!gameIsStarted">
+        <div class="small-12 columns">
+          <button id="start-game" @click="resetApp">
+            START NEW GAME
+          </button>
+        </div>
+      </section>
+      <section class="row controls" v-if="gameIsStarted">
+        <div class="small-12 columns">
+          <button id="attack" @click="attackEnemy">ATTACK</button>
+          <button id="special-attack" @click="specialAttackEnemy">
+            SPECIAL ATTACK
+          </button>
+          <button id="heal" @click="healYourself">HEAL</button>
+          <button id="give-up" @click="surrenderYourself">GIVE UP</button>
+        </div>
+      </section>
+      <section class="row log" v-if="hits.length">
+        <div class="small-12 columns">
+          <ul>
+            <li
+              v-for="line in hits"
+              :class="{'monster-turn': !line.isPlayer, 'player-turn': line.isPlayer}"
+            >
+              {{ line.text }}
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
