@@ -51,6 +51,7 @@ button {
     padding: 12px;
     box-shadow: 0 1px 1px black;
     margin: 10px;
+    outline: none;
 }
 
 #start-game {

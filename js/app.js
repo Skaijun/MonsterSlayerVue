@@ -6,6 +6,7 @@ new Vue({
     yourHP: 100,
     monsterHP: 100,
     hits: [],
+    currentIndex: 0,
   },
   methods: {
     attackEnemy: function () {
@@ -19,7 +20,9 @@ new Vue({
       this.hits.unshift({
         isPlayer: true,
         text: "You hit monster at " + playerDamage + " hp",
+        id: this.currentIndex + 100
       });
+      this.currentIndex++;
       if (this.checkResult()) {
         return;
       }
@@ -35,7 +38,9 @@ new Vue({
       this.hits.unshift({
         isPlayer: true,
         text: "You crash monster at " + playerDamage + " hp",
+        id: this.currentIndex + 150
       });
+      this.currentIndex++;
       if (this.checkResult()) {
         return;
       }
@@ -53,7 +58,9 @@ new Vue({
       this.hits.unshift({
         isPlayer: true,
         text: "You have healed 10 hp",
+        id: this.currentIndex + 200
       });
+      this.currentIndex++;
     },
     surrenderYourself: function () {
       this.gameIsStarted = false;
@@ -67,7 +74,9 @@ new Vue({
       this.hits.unshift({
         isPlayer: false,
         text: "Monster hits you at " + monsterDamage + " hp",
+        id: this.currentIndex + 300
       });
+      this.currentIndex++;
     },
     checkResult: function () {
       if (this.monsterHP < 1) {
@@ -93,6 +102,7 @@ new Vue({
       this.yourHP = 100;
       this.monsterHP = 100;
       this.hits = [];
+      this.currentIndex = 0;
     },
   },
 });
